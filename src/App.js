@@ -1,33 +1,32 @@
-import Button from "./Button";
+import Accordion from "./components/Accordion";
+import ButtonPage from "./pages/ButtonPage";
 
 function App() {
+  const items = [
+    {
+      id: '123asd',
+      label: "Can I use React on a project?",
+      content: "Lorem ipmsumewq ferer kwek yes",
+    },
+    {
+      id: 'a23jswe',
+      label: "Can I use React on a bowl?",
+      content: "Lorem ipmsumewq ferer kwek yes",
+    },
+    {
+      id: 'k2lssaw',
+      label: "Can I use React?",
+      content: "Lorem ipmsumewq ferer kwek yes",
+    },
+    {
+      id: 'k21ls',
+      label: "Can I use React on a php?",
+      content: "Lorem ipmsumewq ferer kwek yes",
+    },
+  ];
   return (
     <div>
-      <div>
-        <Button success rounded>
-          Click me!
-        </Button>
-      </div>
-      <div>
-        <Button secondary rounded>
-          Click me!
-        </Button>
-      </div>
-      <div>
-        <Button warning rounded>
-          Click me!
-        </Button>
-      </div>
-      <div>
-        <Button primary outline rounded>
-          Hover me!
-        </Button>
-      </div>
-      <div>
-        <Button danger rounded outline>
-          See more!
-        </Button>
-      </div>
+      <Accordion items={items} />
     </div>
   );
 }
