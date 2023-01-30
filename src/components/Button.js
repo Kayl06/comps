@@ -31,7 +31,6 @@ function Button({
     "hover:bg-red-700 hover:text-white": hover && danger,
     "hover:bg-green-700 hover:text-white": hover && success,
     "hover:bg-black hover:text-white": hover && secondary,
-    "hover:bg-green-700 hover:text-white": hover && success,
   });
 
   return <button {...rest} className={classes}>{children}</button>;
