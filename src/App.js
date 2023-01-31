@@ -2,12 +2,10 @@ import { useState } from "react";
 import Dropdown from "./components/Dropdown";
 
 function App() {
-  const [selected, setSelected] = useState(null);
+  const [selection, setSelection] = useState(null);
 
   const handleSelect = (option) => {
-    console.log(option);
-
-    // setSelected(option);
+    setSelection(option);
   };
 
   const options = [
@@ -29,7 +27,11 @@ function App() {
   ];
   return (
     <div>
-      <Dropdown options={options} handleSelect={handleSelect} />
+      <Dropdown
+        options={options}
+        value={selection}
+        onChange={handleSelect}
+      />
     </div>
   );
 }

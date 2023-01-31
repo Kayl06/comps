@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { GoChevronDown } from "react-icons/go";
+import Panel from "./Panel";
 
-function Dropdown({ options, handleSelect }) {
+function Dropdown({ options, onChange, value }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggleOpen = () => {
@@ -10,20 +12,37 @@ function Dropdown({ options, handleSelect }) {
   const handleOptionClick = (option) => {
     setIsOpen(false);
 
-    handleSelect(option)
-  }
+    onChange(option);
+  };
 
   const renderedOptions = options.map((option) => {
-    return <div className="cursor-pointer py-2" onClick={() => {handleOptionClick(option)}} key={option.value}>{option.value}</div>;
+    return (
+      <div
+        className="hover:bg-gray-800 hover:text-white rounded p-1 cursor-pointer"
+        onClick={() => {
+          handleOptionClick(option);
+        }}
+        key={option.value}
+      >
+        {option.label}
+      </div>
+    );
   });
 
   return (
-    <div className="cursor-pointer bg-gray-50 p-4 border-b">
-      <div onClick={handleToggleOpen}>Select...</div>
-      <div>{isOpen && renderedOptions}</div>
+    <div className="w-48 relative">
+      <Panel className="flex justify-between items-center cursor-pointer" onClick={handleToggleOpen}>
+          {value?.label || "Select..."}
+          <GoChevronDown className="text-lg" />
+      </Panel>
+
+      {isOpen && (
+        <Panel className="absolute top-full">
+          {renderedOptions}
+        </Panel>
+      )}
     </div>
   );
 }
 
 export default Dropdown;
-
