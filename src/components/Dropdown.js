@@ -1,9 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { GoChevronDown } from "react-icons/go";
 import Panel from "./Panel";
 
 function Dropdown({ options, onChange, value }) {
   const [isOpen, setIsOpen] = useState(false);
+   // reference to the element; usage - include in the element you want, like this: ref={divEl} 
+  const divEl = useRef();
+
+  useEffect(() => {
+    const handler = (event) => {
+      if (!divEl.current) return;
+
+      if ( !divEl.current.contains(event.target) ) { // clicked outside of the dropdown element
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handler, true);
+
+    // cleanUp;
+    return () => {
+      document.removeEventListener("click", handler, true);
+    };
+  }, []);
 
   const handleToggleOpen = () => {
     setIsOpen(!isOpen);
@@ -30,17 +49,16 @@ function Dropdown({ options, onChange, value }) {
   });
 
   return (
-    <div className="w-48 relative">
-      <Panel className="flex justify-between items-center cursor-pointer" onClick={handleToggleOpen}>
-          {value?.label || "Select..."}
-          <GoChevronDown className="text-lg" />
+    <div ref={divEl} className="w-48 relative">
+      <Panel
+        className="flex justify-between items-center cursor-pointer"
+        onClick={handleToggleOpen}
+      >
+        {value?.label || "Select..."}
+        <GoChevronDown className="text-lg" />
       </Panel>
 
-      {isOpen && (
-        <Panel className="absolute top-full">
-          {renderedOptions}
-        </Panel>
-      )}
+      {isOpen && <Panel className="absolute top-full">{renderedOptions}</Panel>}
     </div>
   );
 }
