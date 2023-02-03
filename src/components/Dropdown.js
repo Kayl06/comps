@@ -18,7 +18,7 @@ function Dropdown({ options, onChange, value }) {
 
     document.addEventListener("click", handler, true);
 
-    // cleanUp;
+    // cleanUp; test
     return () => {
       document.removeEventListener("click", handler, true);
     };
