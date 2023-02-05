@@ -10,16 +10,20 @@ function NavigationProvider({ children }) {
       setCurrentPath(window.location.pathname);
     };
 
-    window.addEventListener("popstate", handler);
+    window.addEventListener("popstate", handler); // popstate handles page back
 
     return () => {
-      window.removeEventListener("popstate", handler)
-    }
+      window.removeEventListener("popstate", handler);
+    };
   }, []);
 
+  const navigate = (to) => {
+    window.history.pushState({}, "", to); // pushState will redirect you to the page without full loading the page. 
+    setCurrentPath(to)
+  };
+
   return (
-    <NavigationContext.Provider value={{}}>
-      {currentPath}
+    <NavigationContext.Provider value={{ currentPath, navigate }}>
       {children}
     </NavigationContext.Provider>
   );
