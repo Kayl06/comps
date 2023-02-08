@@ -44,11 +44,13 @@ function SortableTable(props) {
   // Find the correct sortValue function and use it for sorting
   let sortedData = data;
   if (sortOrder && sortBy) {
+
+    // get the sortValue in config that equal to the selected sortBy
     const { sortValue } = config.find((column) => column.label === sortBy);
 
-    sortedData = [...data];
+    sortedData = [...data]; // spread operator / shallow copy of an array.
 
-    sortedData.sort((a, b) => {
+    sortedData.sort((a, b) => { // sort it!
       const valueA = sortValue(a);
       const valueB = sortValue(b);
 
