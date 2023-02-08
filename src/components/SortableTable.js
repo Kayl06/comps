@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { GoArrowSmallUp, GoArrowSmallDown } from "react-icons/go";
 import Table from "./Table";
 
 function SortableTable(props) {
@@ -9,6 +10,13 @@ function SortableTable(props) {
   const { data } = props;
 
   const handleSortClick = (label) => {
+
+    if ( sortBy && label !== sortBy ) {
+      setSortOrder('asc');
+      setSortBy(label);
+      return;
+    }
+
     if (sortOrder === null) {
       setSortOrder("asc");
       setSortBy(label);
@@ -30,10 +38,13 @@ function SortableTable(props) {
       ...column,
       header: () => (
         <th
-          className="cursor-pointer"
+          className="cursor-pointer hover:bg-gray-100 rounded px-3 "
           onClick={() => handleSortClick(column.label)}
         >
-          {column.label}
+          <div className="flex items-center">
+            {getIcon(column.label, sortBy, sortOrder)}
+            {column.label}
+          </div>
         </th>
       ),
     };
@@ -44,13 +55,13 @@ function SortableTable(props) {
   // Find the correct sortValue function and use it for sorting
   let sortedData = data;
   if (sortOrder && sortBy) {
-
     // get the sortValue in config that equal to the selected sortBy
     const { sortValue } = config.find((column) => column.label === sortBy);
 
     sortedData = [...data]; // spread operator / shallow copy of an array.
 
-    sortedData.sort((a, b) => { // sort it!
+    sortedData.sort((a, b) => {
+      // sort it!
       const valueA = sortValue(a);
       const valueB = sortValue(b);
 
@@ -65,6 +76,38 @@ function SortableTable(props) {
   }
 
   return <Table {...props} data={sortedData} config={updatedConfig} />;
+}
+
+function getIcon(label, sortBy, sortOrder) {
+  if (label !== sortBy) {
+    return (
+      <div>
+        <GoArrowSmallUp />
+        <GoArrowSmallDown />
+      </div>
+    );
+  }
+
+  if (sortOrder === null) {
+    return (
+      <div>
+        <GoArrowSmallUp />
+        <GoArrowSmallDown />
+      </div>
+    );
+  } else if (sortOrder === "asc") {
+    return (
+      <div>
+        <GoArrowSmallUp />
+      </div>
+    );
+  } else if (sortOrder === "desc") {
+    return (
+      <div>
+        <GoArrowSmallDown />
+      </div>
+    );
+  }
 }
 
 export default SortableTable;

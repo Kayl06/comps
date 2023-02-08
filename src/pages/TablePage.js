@@ -6,6 +6,7 @@ function TablePage() {
     { name: "Orange", color: "bg-orange-500", score: 5 },
     { name: "Apple", color: "bg-red-500", score: 3 },
     { name: "Banana", color: "bg-yellow-500", score: 4 },
+    { name: "Strawberry", color: "bg-red-700", score: 2 },
     { name: "Guava", color: "bg-green-500", score: 1 },
   ];
 
@@ -13,16 +14,21 @@ function TablePage() {
     {
       label: "Name",
       render: (fruit) => fruit.name,
-      sortValue: (fruit) =>  fruit.name,
+      sortValue: (fruit) => fruit.name,
     },
     {
       label: "Color",
-      render: (fruit) => <div className={`p-3 m-2 ${fruit.color}`} />,
+      render: (fruit) => <div className={`p-3 m-2 ${fruit.color}`} />
     },
     {
       label: "Score",
       render: (fruit) => fruit.score,
-      sortValue: (fruit) =>  fruit.score,
+      sortValue: (fruit) => fruit.score,
+    },
+    {
+      label: "Avg. Score %",
+      render: (fruit) => `${(fruit.score / 10) * 100}%`,
+      sortValue: (fruit) => (fruit.score / 10) * 100,
     },
   ];
 
