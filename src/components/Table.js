@@ -1,6 +1,8 @@
-function Table({ data, config, keyFn }) { // Dynamic Table
-  const renderedRows = data.map((rowData) => {
+import { Fragment } from "react";
 
+function Table({ data, config, keyFn }) {
+  // Dynamic Table
+  const renderedRows = data.map((rowData) => {
     const renderedCells = config.map((column) => {
       return (
         <td className="p-3" key={column.label}>
@@ -17,6 +19,10 @@ function Table({ data, config, keyFn }) { // Dynamic Table
   });
 
   const renderedHeaders = config.map((column) => {
+    if (column.header) {
+      return <Fragment key={column.label}>{column.header()}</Fragment>;
+    }
+
     return <th key={column.label}>{column.label}</th>;
   });
 

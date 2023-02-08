@@ -23,14 +23,13 @@ function ModalPage() {
   const modal = (
     <Modal onClose={handleClose} actionBar={actionBar}>
       <p>
-        {" "}
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
         pellentesque, lectus sed dapibus eleifend, libero orci sollicitudin
         quam, non luctus enim purus eu ex. Curabitur purus ante, volutpat a
         tellus at, dictum dapibus lorem. Nullam quis erat lacus. Donec dapibus
         id augue ac scelerisque. Sed eget urna elementum, mattis ante ut,
         lobortis augue. Sed ex elit, gravida sit amet neque eu, egestas
-        tincidunt nisl. Duis mollis felis quam, sed egestas turpis ornare nec.{" "}
+        tincidunt nisl. Duis mollis felis quam, sed egestas turpis ornare nec.
       </p>
     </Modal>
   );
