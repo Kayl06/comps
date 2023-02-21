@@ -11,6 +11,7 @@ function CounterPage({ initialCount }) {
 
   return (
     <Panel>
+      This is a test push
       Count is {count}
       <div className="flex flex-row gap-2 ">
         <Button primary rounded onClick={increment}>
