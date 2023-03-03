@@ -5,7 +5,7 @@ import Button from "../components/Button";
 const INCREMENT = "increment";
 const DECREMENT = "decrement";
 const CHANGE_VALUE_TO_ADD = "change-value-to-add";
-
+const ADD_VALUE_TO_ADD = "add-value-to-add";
 
 const reducer = (state, action) => {
   console.log(state);
@@ -16,26 +16,27 @@ const reducer = (state, action) => {
         count: state.count + 1,
       };
 
-      break;
-
     case DECREMENT:
       return {
         ...state,
         count: state.count - 1,
       };
 
-      break;
-
     case CHANGE_VALUE_TO_ADD:
       return {
         ...state,
         valueToAdd: action.payload,
       };
-      break;
+
+    case ADD_VALUE_TO_ADD:
+      return {
+        ...state,
+        count: state.count + state.valueToAdd,
+        valueToAdd: 0,
+      };
 
     default:
       return state;
-      break;
   }
 };
 
@@ -63,8 +64,7 @@ function CounterPage({ initialCount }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // setCount( count + valueToAdd );
-    // setValueToAdd(0);
+    dispatch({ type: ADD_VALUE_TO_ADD })
   };
 
   return (
