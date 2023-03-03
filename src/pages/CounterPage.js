@@ -8,7 +8,6 @@ const CHANGE_VALUE_TO_ADD = "change-value-to-add";
 const ADD_VALUE_TO_ADD = "add-value-to-add";
 
 const reducer = (state, action) => {
-  console.log(state);
   switch (action.type) {
     case INCREMENT:
       return {
